@@ -1,10 +1,15 @@
 $max-width: 1440px
 $min-width: 980px
 
+$menu-item-width: 102px
+$menu-item-height: 36px
+
+$input-width: $menu-item-width - 18px + 30px
+
 $menu-top: 82px
 $menu-height: 36px
-$menu-width: 845px + 132px
-$menu-item-width: 101px
+$menu-width: 8 * $menu-item-width + $input-width + 16px
+
 
 @import 'reset.css'
 
@@ -20,10 +25,10 @@ $menu-item-width: 101px
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNicgaGVpZ2h0PSc2Jz4KICA8cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPScjZWVlZWVlJy8+CiAgPGcgaWQ9J2MnPgogICAgPHJlY3Qgd2lkdGg9JzMnIGhlaWdodD0nMycgZmlsbD0nI2U2ZTZlNicvPgogICAgPHJlY3QgeT0nMScgd2lkdGg9JzMnIGhlaWdodD0nMicgZmlsbD0nI2Q4ZDhkOCcvPgogIDwvZz4KICA8dXNlIHhsaW5rOmhyZWY9JyNjJyB4PSczJyB5PSczJy8+Cjwvc3ZnPg==")
   background-repeat: repeat
 
-%menuItemBlock
-  display: inline-flex
-  width: $menu-item-width
-  height: 34px
+@mixin menuItemBlock($x,$y)
+  background-image: url("../img/globalnav.png")
+  background-position-x: -101px * $x
+  background-position-y:  -35px * $y
   /*border-width: thin*/
   /*border-style: solid*/
   /*border-color: white*/
@@ -37,6 +42,7 @@ body
   width: 100%
   max-width: $max-width
   min-width: $min-width
+  margin: auto
   background-color: gray
   display: flex
   flex-direction: column
@@ -52,39 +58,58 @@ body
   background-position-x: center
 
   nav
-    /*width: 845px*/
+    /*@extend %mark*/
     display: inline-flex
+    justify-content: flex-start
     margin: auto
     height: $menu-height
     width: $menu-width
     margin-top: $menu-top
-    background-image: url("../img/menu-back.png")
+    /*background-image: url("../img/menu-back.png")*/
     /*background-image: url("../img/globalnav.png")*/
+    border: 1px solid rgba(128, 128, 128, 0.5)
     border-radius: 5px
+    overflow: hidden
 
     @for $i from 0 through 8
       .item-#{$i}
         /*@extend %mark*/
-        @extend %menuItemBlock
+        display: inline-flex
+        width: $menu-item-width
+        height: $menu-item-height
+        @include menuItemBlock(1,0)
+        /*border-right: thin solid rgba(70, 70, 70, 0.5)*/
+
+      .item-#{$i}:hover
+        @include menuItemBlock(1,2)
+
+      .link-#{$i}
+        width: $menu-item-width
+        height: $menu-item-height
         @include menuItem($i)
-        border-right: thin solid rgba(70, 70, 70, 0.5)
 
     .item-search
-      @extend %menuItemBlock
+      /*@include menuItemBlock(1,0)*/
+      background-image: url("../img/menu-back.png")
+      display: inline-flex
+      /*width: $menu-item-width*/
+      height: $menu-item-height
       align-items: center
       vertical-align: top
       padding: 0px 7px
 
       .fa-search
         position: relative
-        left: 20px
+        left: 4 - $input-width
+        margin-right: -10px
         color: white
         font-size: 11px
+        z-index: 9999
 
       input
         background-color: rgba(255, 255, 255, 0.15)
         border-radius: 10px
-        width: $menu-item-width + 8px
+        width: $input-width
         text-indent: 30px
         font-size: 16px
         border-top: thin solid #3e3e3e
@@ -105,6 +130,10 @@ body
     text-align: center
     margin-top: 40px
     /*background-image: url("../img/text.png")*/
+
+    a
+      color: white
+      text-decoration: none
 
     .msg
       font-weight: 400
