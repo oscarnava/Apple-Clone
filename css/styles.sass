@@ -1,0 +1,170 @@
+$max-width: 1440px
+$min-width: 980px
+
+$menu-top: 82px
+$menu-height: 36px
+$menu-width: 845px + 132px
+$menu-item-width: 101px
+
+@import 'reset.css'
+
+@mixin menuItem($id)
+  background-repeat: no-repeat
+  background-image: url("../img/menu-labels.svg")
+  background-position-x: -28px
+  background-position-y: 2 - 30px * $id
+
+%mark
+  border: 2px dashed rgba(146, 0, 165, 0.5)
+  background-color: rgba(146, 0, 165, 0.15)
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNicgaGVpZ2h0PSc2Jz4KICA8cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPScjZWVlZWVlJy8+CiAgPGcgaWQ9J2MnPgogICAgPHJlY3Qgd2lkdGg9JzMnIGhlaWdodD0nMycgZmlsbD0nI2U2ZTZlNicvPgogICAgPHJlY3QgeT0nMScgd2lkdGg9JzMnIGhlaWdodD0nMicgZmlsbD0nI2Q4ZDhkOCcvPgogIDwvZz4KICA8dXNlIHhsaW5rOmhyZWY9JyNjJyB4PSczJyB5PSczJy8+Cjwvc3ZnPg==")
+  background-repeat: repeat
+
+%menuItemBlock
+  display: inline-flex
+  width: $menu-item-width
+  height: 34px
+  /*border-width: thin*/
+  /*border-style: solid*/
+  /*border-color: white*/
+
+body
+  overflow-x: hidden
+  font-size: 10px
+  font-family: "Yantramanav","Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif
+
+#main-container
+  width: 100%
+  max-width: $max-width
+  min-width: $min-width
+  background-color: gray
+  display: flex
+  flex-direction: column
+
+#top-content
+  /*@extend %mark*/
+  width:  100%
+  height: 538px
+  margin: 0px
+  text-align: center
+  background-image: url("../img/alpinists.jpg")
+  background-position-y: bottom
+  background-position-x: center
+
+  nav
+    /*width: 845px*/
+    display: inline-flex
+    margin: auto
+    height: $menu-height
+    width: $menu-width
+    margin-top: $menu-top
+    background-image: url("../img/menu-back.png")
+    /*background-image: url("../img/globalnav.png")*/
+    border-radius: 5px
+
+    @for $i from 0 through 8
+      .item-#{$i}
+        /*@extend %mark*/
+        @extend %menuItemBlock
+        @include menuItem($i)
+        border-right: thin solid rgba(70, 70, 70, 0.5)
+
+    .item-search
+      @extend %menuItemBlock
+      align-items: center
+      vertical-align: top
+      padding: 0px 7px
+
+      .fa-search
+        position: relative
+        left: 20px
+        color: white
+        font-size: 11px
+
+      input
+        background-color: rgba(255, 255, 255, 0.15)
+        border-radius: 10px
+        width: $menu-item-width + 8px
+        text-indent: 30px
+        font-size: 16px
+        border-top: thin solid #3e3e3e
+        border-left: thin solid #3e3e3e
+        border-right: thin solid rgba(128, 128, 128, 0.8)
+        border-bottom: thin solid rgba(128, 128, 128, 0.8)
+
+      input:focus
+        background-color: white
+
+  #message-text
+    /*@extend %mark
+    display: flex
+    flex-direction: column
+    justify-content: center
+    color: white
+    font-size: 32px
+    text-align: center
+    margin-top: 40px
+    /*background-image: url("../img/text.png")*/
+
+    .msg
+      font-weight: 400
+
+    .big
+      font-size: 2em
+      margin-bottom: .5em
+
+    .medium
+      margin-bottom: 1em
+
+    .small
+      font-size: .8em
+      margin-bottom: 1em
+
+#articles
+  /*@extend %mark*/
+  width:  100%
+  height: 200px
+  display: flex
+  background-color: red
+
+  .article
+    flex-grow: 25%
+    display: flex
+    justify-content: center
+    align-content: center
+    overflow: hidden
+    border: 1px solid white
+
+footer
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+  max-width: $max-width
+  min-width: $min-width
+  margin: auto
+  padding: 10px 0 26px
+  color: #6e6e6e
+  font: 10px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif
+
+  div
+    flex-basis: 40%
+    padding-top: 15px
+    text-align: left
+
+    a
+      color: #0088cc
+      text-decoration: none
+
+    a:hover
+      text-decoration: underline
+
+  .links
+    display: flex
+    align-items: center
+
+    a
+      padding: 0 5px
+      border-right: thin solid lightgrey
+
+    a:last-child
+      border-right: none
