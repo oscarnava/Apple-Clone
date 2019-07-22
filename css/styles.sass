@@ -25,13 +25,23 @@ $menu-width: 8 * $menu-item-width + $input-width + 16px
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNicgaGVpZ2h0PSc2Jz4KICA8cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPScjZWVlZWVlJy8+CiAgPGcgaWQ9J2MnPgogICAgPHJlY3Qgd2lkdGg9JzMnIGhlaWdodD0nMycgZmlsbD0nI2U2ZTZlNicvPgogICAgPHJlY3QgeT0nMScgd2lkdGg9JzMnIGhlaWdodD0nMicgZmlsbD0nI2Q4ZDhkOCcvPgogIDwvZz4KICA8dXNlIHhsaW5rOmhyZWY9JyNjJyB4PSczJyB5PSczJy8+Cjwvc3ZnPg==")
   background-repeat: repeat
 
+%menu-background-high
+  background: linear-gradient(180deg, rgba(136,136,136,1) 0%, rgba(80,80,80,1) 54%, rgba(77,77,77,1) 57%, rgba(79,79,79,1) 59%, rgba(136,136,136,1) 100%)
+
+%menu-background-low
+  background: linear-gradient(180deg, rgba(84,84,84,1) 0%, rgba(43,43,43,1) 56%, rgba(84,84,84,1) 100%)
+
 @mixin menuItemBlock($x,$y)
-  background-image: url("../img/globalnav.png")
-  background-position-x: -101px * $x
-  background-position-y:  -35px * $y
-  /*border-width: thin*/
-  /*border-style: solid*/
-  /*border-color: white*/
+  //  Replaces this:
+  //    background-image: url("../img/globalnav.png")
+  //    background-position-x: -101px * $x
+  //    background-position-y:  -35px * $y
+  @if $y == 0
+    @extend %menu-background-high
+  @else
+    @extend %menu-background-low
+
+  border-right: thin solid rgba(0, 0, 0, 0.2)
 
 body
   overflow-x: hidden
@@ -63,7 +73,6 @@ body
     justify-content: flex-start
     margin: auto
     height: $menu-height
-    width: $menu-width
     margin-top: $menu-top
     /*background-image: url("../img/menu-back.png")*/
     /*background-image: url("../img/globalnav.png")*/
@@ -90,9 +99,10 @@ body
 
     .item-search
       /*@include menuItemBlock(1,0)*/
-      background-image: url("../img/menu-back.png")
+      // background-image: url("../img/menu-back.png")
+      @extend %menu-background-high
       display: inline-flex
-      /*width: $menu-item-width*/
+      width: $menu-item-width + 20px
       height: $menu-item-height
       align-items: center
       vertical-align: top
@@ -100,7 +110,7 @@ body
 
       .fa-search
         position: relative
-        left: 4 - $input-width
+        left: 8px
         margin-right: -10px
         color: white
         font-size: 11px
