@@ -281,6 +281,7 @@ body {
   /*@extend %mark */
   width: 100%;
   height: 200px;
+  padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,7 +313,7 @@ footer {
   max-width: 1440px;
   min-width: 980px;
   margin: auto;
-  padding: 10px 0 26px;
+  padding: 0 0 26px;
   color: #6e6e6e;
   font: 10px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif; }
   footer div {
