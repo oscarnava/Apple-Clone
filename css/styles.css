@@ -274,6 +274,8 @@ body {
     #top-content #message-text .small {
       font-size: 0.8em;
       margin-bottom: 1em; }
+    #top-content #message-text .text-background {
+      background-image: url("../img/transparent-image.png"); }
 
 #articles {
   /*@extend %mark */
