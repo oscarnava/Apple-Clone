@@ -317,8 +317,26 @@ body {
   font-size: 0.8em;
   margin-bottom: 1em;
 }
-#top-content #message-text .text-background {
-  background-image: url("../img/transparent-image.png");
+#top-content #message-text .message-1 {
+  width: 980px;
+  height: 100px;
+  margin: auto;
+  background-image: url("../img/what_will_your_verse_be.png");
+  background-repeat: no-repeat;
+}
+#top-content #message-text .message-2 {
+  width: 980px;
+  height: 82px;
+  margin: auto;
+  background-image: url("../img/everyone_has_something.png");
+  background-repeat: no-repeat;
+}
+#top-content #message-text .message-3 {
+  width: 980px;
+  height: 32px;
+  margin: auto;
+  background-image: url("../img/watch_the_film.png");
+  background-repeat: no-repeat;
 }
 
 #articles {
@@ -348,16 +366,20 @@ body {
   background-position-y: center;
   background-position-x: center;
 }
-#articles .img-1 {
+#articles .article div {
+  width: 364px;
+  height: 200px;
+}
+#articles .article .img-1 {
   background-image: url("../img/iPhone5s.jpg");
 }
-#articles .img-2 {
+#articles .article .img-2 {
   background-image: url("../img/iPhone5C.jpg");
 }
-#articles .img-3 {
+#articles .article .img-3 {
   background-image: url("../img/happy-birthday.jpg");
 }
-#articles .img-4 {
+#articles .article .img-4 {
   background-image: url("../img/lab.jpg");
 }
 
