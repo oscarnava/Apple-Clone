@@ -1,0 +1,254 @@
+$max-width: 1440px
+$min-width: 980px
+
+$menu-item-width: 102px
+$menu-item-height: 36px
+
+$input-width: $menu-item-width - 18px + 30px
+
+$menu-top: 82px
+$menu-height: 36px
+$menu-width: 8 * $menu-item-width + $input-width + 16px
+
+
+@import 'reset.css'
+
+@mixin menuItem($id)
+  background-repeat: no-repeat
+  background-image: url("../img/menu-labels.svg")
+  background-position-x: -28px
+  background-position-y: 2 - 30px * $id
+
+%mark
+  border: 2px dashed rgba(146, 0, 165, 0.5)
+  background-color: rgba(146, 0, 165, 0.15)
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJyB3aWR0aD0nNicgaGVpZ2h0PSc2Jz4KICA8cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPScjZWVlZWVlJy8+CiAgPGcgaWQ9J2MnPgogICAgPHJlY3Qgd2lkdGg9JzMnIGhlaWdodD0nMycgZmlsbD0nI2U2ZTZlNicvPgogICAgPHJlY3QgeT0nMScgd2lkdGg9JzMnIGhlaWdodD0nMicgZmlsbD0nI2Q4ZDhkOCcvPgogIDwvZz4KICA8dXNlIHhsaW5rOmhyZWY9JyNjJyB4PSczJyB5PSczJy8+Cjwvc3ZnPg==")
+  background-repeat: repeat
+
+%menu-background-high
+  background: linear-gradient(180deg, rgba(136,136,136,1) 0%, rgba(80,80,80,1) 54%, rgba(77,77,77,1) 57%, rgba(79,79,79,1) 59%, rgba(136,136,136,1) 100%)
+
+%menu-background-low
+  background: linear-gradient(180deg, rgba(84,84,84,1) 0%, rgba(43,43,43,1) 56%, rgba(84,84,84,1) 100%)
+
+@mixin menuItemBlock($x,$y)
+  //  Replaces this:
+  //    background-image: url("../img/globalnav.png")
+  //    background-position-x: -101px * $x
+  //    background-position-y:  -35px * $y
+  @if $y == 0
+    @extend %menu-background-high
+  @else
+    @extend %menu-background-low
+
+  border-right: thin solid rgba(0, 0, 0, 0.2)
+
+body
+  overflow-x: hidden
+  font-size: 10px
+  font-family: "Yantramanav","Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif
+
+#main-container
+  width: 100%
+  max-width: $max-width
+  min-width: $min-width
+  margin: auto
+  background-color: gray
+  display: flex
+  flex-direction: column
+
+#top-content
+  /*@extend %mark*/
+  width:  100%
+  height: 538px
+  margin: 0px
+  text-align: center
+  background-image: url("../img/alpinists.jpg")
+  background-position-y: bottom
+  background-position-x: center
+
+  nav
+    /*@extend %mark*/
+    display: inline-flex
+    justify-content: flex-start
+    margin: auto
+    height: $menu-height
+    margin-top: $menu-top
+    /*background-image: url("../img/menu-back.png")*/
+    /*background-image: url("../img/globalnav.png")*/
+    border: 1px solid rgba(128, 128, 128, 0.5)
+    border-radius: 5px
+    overflow: hidden
+
+    @for $i from 0 through 8
+      .item-#{$i}
+        /*@extend %mark*/
+        display: inline-flex
+        width: $menu-item-width
+        height: $menu-item-height
+        @include menuItemBlock(1,0)
+        /*border-right: thin solid rgba(70, 70, 70, 0.5)*/
+
+      .item-#{$i}:hover
+        @include menuItemBlock(1,2)
+
+      .link-#{$i}
+        width: $menu-item-width
+        height: $menu-item-height
+        @include menuItem($i)
+
+    .item-search
+      /*@include menuItemBlock(1,0)*/
+      // background-image: url("../img/menu-back.png")
+      @extend %menu-background-high
+      display: inline-flex
+      width: $menu-item-width + 20px
+      height: $menu-item-height
+      align-items: center
+      vertical-align: top
+      padding: 0px 7px
+
+      .fa-search
+        position: relative
+        left: 8px
+        margin-right: -10px
+        color: white
+        font-size: 11px
+        z-index: 9999
+
+      input
+        background-color: rgba(255, 255, 255, 0.15)
+        border-radius: 10px
+        width: $input-width
+        text-indent: 30px
+        font-size: 16px
+        border-top: thin solid #3e3e3e
+        border-left: thin solid #3e3e3e
+        border-right: thin solid rgba(128, 128, 128, 0.8)
+        border-bottom: thin solid rgba(128, 128, 128, 0.8)
+
+      input:focus
+        background-color: white
+
+  #message-text
+    /*@extend %mark*/
+    display: flex
+    flex-direction: column
+    justify-content: center
+    color: white
+    font-size: 32px
+    text-align: center
+    margin-top: 40px
+    /*background-image: url("../img/text.png")*/
+
+    a
+      color: white
+      text-decoration: none
+
+    .msg
+      font-weight: 400
+
+    .big
+      font-size: 2em
+      margin-bottom: .5em
+
+    .medium
+      margin-bottom: 1em
+
+    .small
+      font-size: .8em
+      margin-bottom: 1em
+
+    .message-1
+      width: 980px
+      height: 100px
+      margin: auto
+      background-image: url("../img/what_will_your_verse_be.png")
+      background-repeat: no-repeat
+
+    .message-2
+      width: 980px
+      height: 82px
+      margin: auto
+      background-image: url("../img/everyone_has_something.png")
+      background-repeat: no-repeat
+
+    .message-3
+      width: 980px
+      height: 32px
+      margin: auto
+      background-image: url("../img/watch_the_film.png")
+      background-repeat: no-repeat
+
+#articles
+  /*@extend %mark*/
+  width:  100%
+  max-width: $max-width
+  height: 200px
+  padding: 0
+  margin: auto
+  display: flex
+  background-color: red
+
+  .article
+    display: block
+    width: 100%
+    height: 200px
+    padding: 0px
+    margin: 0px
+    flex-grow: 25%
+    overflow: hidden
+    border: 1px solid white
+    background-repeat: no-repeat
+    background-position-y: center
+    background-position-x: center
+
+    div
+      width: 364px
+      height: 200px
+
+    .img-1
+      background-image: url("../img/iPhone5s.jpg")
+
+    .img-2
+      background-image: url("../img/iPhone5C.jpg")
+
+    .img-3
+      background-image: url("../img/happy-birthday.jpg")
+
+    .img-4
+      background-image: url("../img/lab.jpg")
+
+footer div.fml
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+  max-width: $max-width
+  min-width: $min-width
+  margin: auto
+  padding: 0 0 26px
+  color: #6e6e6e
+  font: 10px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif
+
+  div
+    flex-basis: 40%
+    padding-top: 15px
+    text-align: left
+
+    a
+      color: #0088cc
+      text-decoration: none
+
+    a:hover
+      text-decoration: underline
+
+  .links
+    display: flex
+    align-items: center
+
+    a
+      padding: 0 5px
+      border-right: thin solid lightgrey
+
+    a:last-child
+      border-right: none
